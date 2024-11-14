@@ -244,4 +244,11 @@ public class GroupServiceTest {
         String expected = "Group{reference=MSIR , number student=0}";
         assertEquals(expected, groupService.findByReference("MSIR").showGroup());
     }
+    
+    @Test
+    public void testGroupToString() {
+        Group group = new Group(GroupName.MSIR);
+        String expected = "Group{reference=MSIR}";
+        assertEquals(expected, group.toString());
+    }
 }

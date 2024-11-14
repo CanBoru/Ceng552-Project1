@@ -54,6 +54,11 @@ public class StudentServiceTest {
         studentService.saveStudent(2, "Jane Doe", date2, group2);
         assertEquals(2, studentService.allStudents().size());
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testSaveStudent_NegativeId() {
+    	studentService.saveStudent(-1, VALID_NAME, date1, group1);
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSaveStudent_NullId() {
@@ -241,4 +246,27 @@ public class StudentServiceTest {
         }
         assertEquals(100, studentService.allStudents().size());
     }
+    
+    @Test
+    public void testStudentToString() {
+        // Create test data
+        Integer id = 1;
+        String fullName = "John Doe";
+        LocalDate dateBirth = LocalDate.of(2000, 1, 1);
+        Group group = new Group(GroupName.MSIR);
+        
+        // Create student
+        Student student = new Student(id, fullName, dateBirth, group);
+        
+        // Expected string format based on Student.java toString() implementation
+        String expected = "Student{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", dateBirth=" + dateBirth +
+                ", group=" + group +
+                '}';
+                
+        assertEquals(expected, student.toString());
+    }
+
 }
