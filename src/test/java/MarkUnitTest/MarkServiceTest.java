@@ -256,4 +256,14 @@ public class MarkServiceTest {
         assertNotNull(best);
         assertEquals(student1, best); // Should return first student with that mark
     }
+    
+    @Test
+    public void testMarkToString() {
+        Mark mark = new Mark(student1, VALID_MARK, module1);
+        String markString = mark.toString();
+        assertTrue(markString.contains("student=" + student1));
+        assertTrue(markString.contains("mark=" + VALID_MARK));
+        assertTrue(markString.contains("module=" + module1));
+    }
+    
 }

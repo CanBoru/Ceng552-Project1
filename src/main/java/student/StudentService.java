@@ -115,9 +115,9 @@ public class StudentService implements StudentRepository {
             throw new IllegalArgumentException("Date of birth cannot be in the future");
         }
 
-        // Check if date is too far in the past (more than 100 years)
-        if (dateOfBirth.isBefore(LocalDate.now().minusYears(100))) {
-            throw new IllegalArgumentException("Date of birth cannot be more than 100 years ago");
+        // Check if date is too far in the past (more than 99 years)
+        if (dateOfBirth.isBefore(LocalDate.now().minusYears(99))) {
+            throw new IllegalArgumentException("Date of birth cannot be more than 99 years ago");
         }
 
         // Validate group
