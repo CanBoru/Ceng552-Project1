@@ -69,13 +69,13 @@ public class StudentService implements StudentRepository {
 
     @Override
     public Student findById(Integer id) {
-        if (id == null) {
+    	if (id == null) {
             throw new IllegalArgumentException("Student ID cannot be null");
         }
-        if (id < 0) {
+    	
+    	if (id < 0) {
             throw new IllegalArgumentException("Student ID cannot be negative");
         }
-
         for (Student student : listStudent) {
             if (student.getId().equals(id)) {
                 return student;
@@ -101,8 +101,13 @@ public class StudentService implements StudentRepository {
         }
 
         // Validate name
-        if (fullName == null || fullName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Student name cannot be null or empty");
+        if (fullName == null) {
+            throw new IllegalArgumentException("Student name cannot be null");
+        }
+        
+        // Validate name
+        if (fullName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Student name cannot be empty");
         }
 
         // Validate date of birth
