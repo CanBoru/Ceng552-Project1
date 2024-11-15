@@ -180,6 +180,18 @@ public class StudentServiceTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
+    public void testUpdateStudent_WhitespaceName() {
+        studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
+        studentService.updateStudent(VALID_ID, "  ", date1, group1);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateStudent_NullName() {
+        studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
+        studentService.updateStudent(VALID_ID, null, date1, group1);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
     public void testUpdateStudent_NullID() {
         studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
         studentService.updateStudent(null, VALID_NAME, date1, group1);
