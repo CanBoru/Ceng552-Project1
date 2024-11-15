@@ -159,7 +159,22 @@ public class StudentServiceTest {
     public void testFindById_NegativeId() {
         studentService.findById(-5);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindIndexById_ExistingStudent() {
+        studentService.saveStudent(1, "John Doe", date1, group1); // Adds student
+        Integer index = studentService.findIndexById(1);
+        assertNotNull(index); // Checks that index is returned
+        assertEquals(0, index.intValue()); // Index should be 0
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindIndexById_NonExistingStudent() {
+        studentService.saveStudent(1, "John Doe", date1, group1); // Adds student
+        Integer index = studentService.findIndexById(999); // Non-existing ID
+        assertNull(index); // Should return null for non-existing ID
+    }
+    
     // ============= UpdateStudent Tests (Decision Table Testing) =============
 
     @Test

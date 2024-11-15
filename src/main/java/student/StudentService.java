@@ -84,7 +84,7 @@ public class StudentService implements StudentRepository {
         throw new IndexOutOfBoundsException("Student with ID " + id + " not found");
     }
 
-    private Integer findIndexById(Integer id) {
+    public Integer findIndexById(Integer id) {
         for (int i = 0; i < listStudent.size(); i++) {
             if (listStudent.get(i).getId().equals(id)) {
                 return i;
