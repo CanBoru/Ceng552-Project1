@@ -220,4 +220,21 @@ public class TeacherServiceTest {
         }
         assertEquals(100, teacherService.allTeachers().size());
     }
+    
+    @Test
+    public void testTeacherToString() {
+        // Create a teacher with known values
+        Teacher teacher = new Teacher(VALID_ID, VALID_NAME, Grade.MCA, modules1, groups1);
+        
+        // Expected string format based on Teacher.java toString() implementation
+        String expected = "Teacher{" +
+                "id=" + VALID_ID +
+                ", fullName='" + VALID_NAME + '\'' +
+                ", grade=" + Grade.MCA +
+                ", listModules=" + modules1 +
+                ", listGroup=" + groups1 +
+                '}';
+                
+        assertEquals(expected, teacher.toString());
+    }
 }
