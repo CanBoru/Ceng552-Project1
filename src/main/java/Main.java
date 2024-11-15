@@ -67,7 +67,7 @@ public class Main {
         showMarks(lm);
         }
 
-    private static List<Mark> createMarks() {
+    protected static List<Mark> createMarks() {
         Integer[] idStudent ={1,1,2};
         ModuleName[] refModule ={ModuleName.BDA, ModuleName.CRY, ModuleName.CRY};
         Integer[] notes={15,11,10};
@@ -82,7 +82,7 @@ public class Main {
         }
         return markService.allMarks();}
 
-    private static List<Teacher> createTeachers() {
+    protected static List<Teacher> createTeachers() {
         String[] fullNames ={"khalifa ahmed","brahim gasbi"};
         GroupName[][] nameGroup ={{GroupName.MIAD, GroupName.MSIA}, {GroupName.MSIR}};
         ModuleName[][] moduleName ={{ModuleName.BDA},{ModuleName.GL,ModuleName.RI}};
@@ -109,42 +109,42 @@ public class Main {
         }
     return teacherService.allTeachers();}
 
-    private static void showGroup(List<Group> allGroups) {
+    protected static void showGroup(List<Group> allGroups) {
         for (Group group:allGroups) {
             System.out.println(group.showGroup());
 
         }
     }
-    private static void showTeachers(List<Teacher> listTeacher) {
+    protected static void showTeachers(List<Teacher> listTeacher) {
         for (Teacher teacher:listTeacher) {
             System.out.println(teacher);
         }
     }
-    private static void showGroups(List<Group> listGroup) {
+    protected static void showGroups(List<Group> listGroup) {
         for (Group group:listGroup) {
             System.out.println(group);
         }
     }
-    private static void showModules(List<Module> listModule) {
+    protected static void showModules(List<Module> listModule) {
         for (Module module:listModule) {
             System.out.println(module);
         }
     }
-    private static void showStudents(List<Student> listStudent) {
+    protected static void showStudents(List<Student> listStudent) {
         for (Student student:listStudent) {
             System.out.println(student);
 
         }
 
     }
-    private static void showMarks(List<Mark> listMarks) {
+    protected static void showMarks(List<Mark> listMarks) {
         for (Mark mark:listMarks) {
             System.out.println(mark);
 
         }
     }
 
-    private static List<Student> createStudents() {
+    protected static List<Student> createStudents() {
         String fullNames[]={"sofian gasb","amine kaci","hamid jebri","hanane safi"};
         LocalDate dateOfBirth []={LocalDate.of(2000, 1, 8)
                 ,LocalDate.of(1999, 5, 11)
@@ -161,7 +161,7 @@ public class Main {
 
    return studentService.allStudents(); }
 
-    private static List<Module> createModules() {
+    protected static List<Module> createModules() {
         ModuleName nameRefModules[]={ModuleName.BDA, ModuleName.CRY
                 , ModuleName.RI,ModuleName.GL};
         String nameModules[]={"base de donnée avancé","cryptographie"
@@ -175,7 +175,7 @@ public class Main {
     }
 
     // returns all created groups
-    private static List<Group> createGroups() {
+    protected static List<Group> createGroups() {
         GroupName nameGroup[]={GroupName.MIAD
                 , GroupName.MSIA, GroupName.MSIR};
         groupService=new GroupService();
