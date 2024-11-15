@@ -15,6 +15,9 @@ import teacher.TeacherService;
 import org.junit.Before;
 import org.junit.Test;
 
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,11 @@ public class MainTest {
     private StudentService studentService;
     private TeacherService teacherService;
     private MarkService markService;
+    
+    public Main callMain() {
+    	Main main = new Main();
+    	return main;
+    }
 
     @Before
     public void setUp() {
@@ -273,4 +281,79 @@ public class MainTest {
         assertEquals(Integer.valueOf(value), mark.getMark());
         assertEquals(moduleName, mark.getModule().getReference());
     }
+    
+    @Test
+    public void testShowGroup() {
+    	Main main = callMain();
+        List<Group> groups = main.createGroups();
+
+        // Redirect System.out
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        // Call showGroup
+        Main.showGroups(groups);
+
+        // Verify the output contains the expected group references
+        String output = outContent.toString();
+        assertTrue(output.contains("MIAD"));
+        assertTrue(output.contains("MSIA"));
+        assertTrue(output.contains("MSIR"));
+
+        // Reset System.out
+        System.setOut(System.out);
+    }
+    
+    @Test
+    public void testMain() {
+        // Given: Setup any necessary data
+        Main main = callMain();
+        createGroups();
+        createModules();
+        createStudents();
+        createTeachers();
+        createMarks();
+
+        // Redirect System.out to capture printed output
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        // When: Call the main method
+        main.main(new String[0]);
+
+        // Then: Verify that the output contains expected data
+        String output = outContent.toString();
+
+        // Verify the output contains the expected group names
+        assertTrue(output.contains("MIAD"));
+        assertTrue(output.contains("MSIA"));
+        assertTrue(output.contains("MSIR"));
+
+        // Verify the output contains the expected module names
+        assertTrue(output.contains("BDA"));
+        assertTrue(output.contains("CRY"));
+        assertTrue(output.contains("RI"));
+        assertTrue(output.contains("GL"));
+
+        // Verify the output contains the expected student names
+        assertTrue(output.contains("sofian gasb"));
+        assertTrue(output.contains("amine kaci"));
+        assertTrue(output.contains("hamid jebri"));
+        assertTrue(output.contains("hanane safi"));
+
+        // Verify the output contains the expected teacher names
+        assertTrue(output.contains("khalifa ahmed"));
+        assertTrue(output.contains("brahim gasbi"));
+
+        // Verify the output contains the expected marks
+        assertTrue(output.contains("15"));
+        assertTrue(output.contains("11"));
+        assertTrue(output.contains("10"));
+
+        // Reset System.out
+        System.setOut(System.out);
+    }
+
+    
+    
 }
