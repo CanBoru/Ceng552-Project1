@@ -24,6 +24,7 @@ public class StudentServiceTest {
     private static final String LONG_NAME = "This is a very long name that might exceed any reasonable length limit for a student name";
     private static final Integer VALID_ID = 1;
     private static final LocalDate FUTURE_DATE = LocalDate.now().plusYears(1);
+    private static final LocalDate BEFORE_DATE = LocalDate.now().minusYears(100);
 
     @Before
     public void setUp() {
@@ -32,6 +33,7 @@ public class StudentServiceTest {
         group2 = new Group(GroupName.MIAD);
         date1 = LocalDate.of(2000, 1, 1);
         date2 = LocalDate.of(2001, 2, 2);
+        
     }
 
     // ============= SaveStudent Tests (Decision Table Testing) =============
@@ -152,6 +154,11 @@ public class StudentServiceTest {
     public void testFindById_NullId() {
         studentService.findById(null);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindById_NegativeId() {
+        studentService.findById(-5);
+    }
 
     // ============= UpdateStudent Tests (Decision Table Testing) =============
 
@@ -171,6 +178,12 @@ public class StudentServiceTest {
         studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
         studentService.updateStudent(VALID_ID, "", date1, group1);
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateStudent_NullID() {
+        studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
+        studentService.updateStudent(null, VALID_NAME, date1, group1);
+    }
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateStudent_NullDate() {
@@ -182,6 +195,18 @@ public class StudentServiceTest {
     public void testUpdateStudent_FutureDate() {
         studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
         studentService.updateStudent(VALID_ID, VALID_NAME, FUTURE_DATE, group1);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateStudent_BeforeDate() {
+        studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
+        studentService.updateStudent(VALID_ID, VALID_NAME, BEFORE_DATE, group1);
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateStudent_NullGroup() {
+        studentService.saveStudent(VALID_ID, VALID_NAME, date1, group1);
+        studentService.updateStudent(VALID_ID, VALID_NAME, date1, null);
     }
 
     // ============= AllStudents Tests (Equivalence Class Testing) =============
